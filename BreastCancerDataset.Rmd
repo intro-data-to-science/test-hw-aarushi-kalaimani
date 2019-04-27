@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output:
+  word_document: default
+  html_notebook: default
+  pdf_document: default
+---
+
+```{r}
+#Install these packages from the menu Tools>Install packages.# To load the packages use the following library function
+library(ggplot2)
+library(readxl)
+Breast_cancer_dataset<-read_excel("breast_cancer.xlsx")
+summary.data.frame(Breast_cancer_dataset)
+```
+```{r}
+#This graph depicts a correlation of tumor mean radius and mean texture with the type of cancer diagnosis.
+
+ggplot(Breast_cancer_dataset, aes(x=radius_mean,y=texture_mean,colour=diagnosis  )) +geom_point()
+
+```
+
+```{r}
+#The boxplot portrays that patients with a malignant diagnosis have tumors with a slightly higher mean concavity, compared to patients with a benign diagnosis.
+
+ggplot(Breast_cancer_dataset, aes(diagnosis,concavity_mean)) +geom_boxplot()
+```
+```{r}
+#This graph portrays the distribution of tumor mean area and perimeter as a side-by-side comparison based on the type of cancer diagnosis.
+
+ggplot(Breast_cancer_dataset,aes(area_mean,perimeter_mean))+geom_point(colour="blue")+facet_wrap(~diagnosis)
+```
+```{r}
+#The frequency polygon shows that a patients diagnosed with malignant tumors have tumors with a mean perimeter ranging from 75-150.  Additionally, most patients diagnosed with a benign tumor had a tumor with a mean perimeter ranging from 50-100.
+
+ggplot(Breast_cancer_dataset,aes(perimeter_mean,colour=diagnosis))+geom_freqpoly(binwidth=2.5)
+```
+
